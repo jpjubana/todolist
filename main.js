@@ -1,15 +1,21 @@
-    var newTaskInput = document.getElementById("new-todo");
-    var todolistContainer = document.getElementById("todo-list");
+const list = document.querySelector('.todo-list');
+const input = document.querySelector('.new-todo');
 
-    function(event) {
-        if (event.which == 13 || event.keyCode == 13) {
-            return false;
-        }
-        return true;
-    };
 
-    newTaskInput.addEventListener('keypress', function(event) {
-        var taskName = newTaskInput.value;
-        newTaskInput.value = "";
-        todolistContainer.insertAdjacentHTML('afterbegin', taskName);
-    });
+function addTodo(event) {
+    if (event.keyCode === 13) {
+        let text = input.value;
+        let html = itemTemplate(text);
+
+
+        list.insertAdjacentHTML('beforeend', html);
+
+        input.value = "";
+    }
+}
+
+function itemTemplate(text) {
+    return '<li><div class="view"><label>' + text + '</label></div></li>';
+}
+
+input.addEventListener('keypress', addTodo);
